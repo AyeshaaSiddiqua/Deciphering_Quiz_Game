@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=B">
+    <title>Battle Face Off</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="{% static 'quiz.js' %}"></script>
+    <style>
+        .{
+            box-sizing: border-box;
+        }
+        .Team_A{
+            border: 5px solid blue;
+            float: left;
+            width: 50%;
+        }
+        .Team_B{
+            border: 5px solid black; 
+            float: right;
+            width: 50%;
+        }
+        
+        @media (min-width: 768px){
+            .Parent{
+            display: flex;
+        }
+        }
+    </style>
+</head>
+<body>
+    <section class="Parent">
+        
+        <section class="Team_A">
+            <center><h1 style="color:DeepPink;">PLAYER A</h1></center>
+                <div class="col-lg-8 border border-success p-4 m-4 mx-auto">
+                    <h2>{{obj_A_question_A}}</h2>
+                    <form>
+                    <div class="radio">
+                    <label><input type="radio" name="name"  id="option1" value="{{obj_A_option1_A}}">{{obj_A_option1_A}}</label> 
+                    </div>
+                    <div class="radio">
+                    <label><input type="radio" name="name"  id="option2" value="{{obj_A_option2_A}}">{{obj_A_option2_A}}</label>
+                    </div>
+                    <div class="radio">
+                    <label><input type="radio" name="name" id="option3" value="{{obj_A_option3_A}}">{{obj_A_option3_A}}</label>
+                    </div>
+                    <div class="radio">
+                    <label><input type="radio" name="name"  id="option4" value="{{obj_A_option4_A}}">{{obj_A_option4_A}}</label>
+                    </div>
+                    <p><strong>HINT </strong>= {{obj_A_hint_A}}</p>
+                    </form>
+                    <div class="form-group">
+                    <button class="btn  btn-success" id="save_ans_A" onclick="save_ans_A()">Submit Answer</button>
+                    </div>
+                    <div class="form-group">
+                    {%  if obj_A_id != 5 %}
+                    <a href="/quiz/{{next_A}}/{{obj_B_id}}/"><button class="btn form-control btn-primary" id="submitAnswer_A">Next</button></a>
+                    {% elif obj_B_id != 5 and obj_A_id == 5 %}
+                    <h3 style = "color: crimson;">Please wait...</h3>  
+                    {% endif %}
+                    </div>  
+                </div>
+        </section class="Team_A">
+
+        <section class="Team_B">
+            <center><h1 style="color:DeepPink;">PLAYER B</h1></center>
+            <div class="col-lg-8 border border-success p-4 m-4 mx-auto">
+                <h2>{{obj_B_question_B}}</h2>
+                <form>
+                <div class="radio">
+                <label><input type="radio" name="name"  id="option1" value="{{obj_B_option1_B}}">{{obj_B_option1_B}}</label> 
+                </div>
+                <div class="radio">
+                <label><input type="radio" name="name"  id="option2" value="{{obj_B_option2_B}}">{{obj_B_option2_B}}</label>
+                </div>
+                <div class="radio">
+                <label><input type="radio" name="name" id="option3" value="{{obj_B_option3_B}}">{{obj_B_option3_B}}</label>
+                </div>
+                <div class="radio">
+                <label><input type="radio" name="name"  id="option4" value="{{obj_B_option4_B}}">{{obj_B_option4_B}}</label>
+                </div>
+                <p><strong>HINT </strong>= {{obj_B_hint_B}}</p>
+                </form>
+                <div class="form-group">
+                <button class="btn  btn-success" id="save_ans_B" onclick="save_ans_B()">Submit Answer</button>
+                </div>
+                <div class="form-group">
+                {%  if obj_B_id != 5 %}
+                <a href="/quiz/{{obj_A_id}}/{{next_B}}/"><button class="btn form-control btn-primary" id="submitAnswer_b">Next</button></a>
+                {% elif obj_B_id == 5 and obj_A_id != 5  %}
+                <h3 style = "color: crimson;">Please wait...</h3>  
+                {% endif %}
+                </div>  
+            </div>         
+        </section class="Team_B">
+    </section class="Parent">
+        {% if obj_B_id == 5 and obj_A_id == 5 %}
+        <div> </br>
+          <h7 style="font-size:70px;"><center><a href="/battleresult/"><button class="btn btn-success btn-lg" id="submitAnswer_b">Submit Quiz</button></a></center></h7>  
+        </div>
+        {% endif %}
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>       
+</body>
+</html>
